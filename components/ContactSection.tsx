@@ -49,7 +49,6 @@ export default function ContactSection({ onOpenMessageModal }: ContactSectionPro
             ) : (
               <>
                 <Copy className="size-3.5" />
-                <span className="text-xs">Copy</span>
               </>
             )}
           </button>
