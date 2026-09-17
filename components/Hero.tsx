@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import avatarPic from '@/public/avatar.jpg';
 import { Calendar, Mail } from 'lucide-react';
 import { motion } from 'motion/react';
 import DesignQuotes from './DesignQuotes';
@@ -23,7 +24,7 @@ export default function Hero({ onOpenContact }: HeroProps) {
           <div className="relative size-20 sm:size-22 overflow-hidden rounded-full border-2 border-border/80 bg-muted shadow-sm">
             <Image
               alt="Kingsley Solomon"
-              src="/avatar.jpg"
+              src={avatarPic}
               width={88}
               height={88}
               priority
