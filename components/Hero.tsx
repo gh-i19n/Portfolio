@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import avatarPic from '@/public/avatar.jpg';
-import { Calendar, Mail } from 'lucide-react';
+import { Mail, Send } from 'lucide-react';
 import { motion } from 'motion/react';
 import DesignQuotes from './DesignQuotes';
 
@@ -87,22 +87,22 @@ export default function Hero({ onOpenContact }: HeroProps) {
 
       {/* Action buttons with comfortable touch targets and spacing */}
       <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-        <button
-          type="button"
-          onClick={onOpenContact}
-          className="group/button inline-flex shrink-0 items-center justify-center rounded-md border border-transparent text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:ring-3 focus-visible:ring-ring/50 bg-primary text-primary-foreground h-10 gap-2 px-4.5 shadow-xs hover:brightness-105 active:scale-98 cursor-pointer"
-        >
-          <Calendar className="size-4" />
-          <span>Book call</span>
-        </button>
-
         <a
           href="mailto:kinxly@gmail.com"
-          className="group/button inline-flex shrink-0 items-center justify-center rounded-md border border-border text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:ring-3 focus-visible:ring-ring/50 bg-secondary text-secondary-foreground h-10 gap-2 px-4.5 hover:bg-muted active:scale-98"
+          className="group/button inline-flex shrink-0 items-center justify-center rounded-md border border-transparent text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:ring-3 focus-visible:ring-ring/50 bg-primary text-primary-foreground h-10 gap-2 px-4.5 shadow-xs hover:brightness-105 active:scale-98"
         >
           <Mail className="size-4" />
           <span>Send email</span>
         </a>
+
+        <button
+          type="button"
+          onClick={onOpenContact}
+          className="group/button inline-flex shrink-0 items-center justify-center rounded-md border border-border text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:ring-3 focus-visible:ring-ring/50 bg-secondary text-secondary-foreground h-10 gap-2 px-4.5 hover:bg-muted active:scale-98 cursor-pointer"
+        >
+          <Send className="size-4" />
+          <span>Send quick note</span>
+        </button>
       </div>
     </motion.section>
   );

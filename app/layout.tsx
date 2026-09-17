@@ -8,7 +8,6 @@ export const metadata: Metadata = {
     title: 'Kingsley Solomon - Full Stack Software Engineer',
     description: 'Portfolio of Ifijeh Kingsley Solomon, Full Stack Software Engineer specializing in React, Next.js, Java, Spring Boot, Node.js, and Agentic Systems.',
     type: 'website',
-    url: 'https://i19n.dev',
   },
   twitter: {
     card: 'summary_large_image',

@@ -1,6 +1,6 @@
 'use client';
 
-import { Globe, Mail, Phone } from 'lucide-react';
+import { Mail } from 'lucide-react';
 
 export default function SocialLinks() {
   return (
@@ -109,7 +109,7 @@ export default function SocialLinks() {
           </a>
         </li>
 
-        {/* Portfolio Domain i19n.dev */}
+        {/* Twitter / X */}
         <li>
           <a
             target="_blank"
@@ -117,10 +117,19 @@ export default function SocialLinks() {
             data-slot="badge"
             data-variant="secondary"
             className="group/badge inline-flex w-fit shrink-0 items-center justify-center overflow-hidden rounded-full border border-border/80 font-medium whitespace-nowrap outline-0 transition-all focus-visible:ring-3 focus-visible:ring-ring/50 bg-secondary text-secondary-foreground h-8 gap-2 px-3.5 text-xs sm:text-sm hover:border-primary/50 hover:bg-muted"
-            href="https://i19n.dev"
+            href="https://x.com/i19n_dev"
           >
-            <Globe className="size-4 text-emerald-500" />
-            <span>i19n.dev</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="size-3.5 text-foreground"
+            >
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+            <span>Twitter / X</span>
           </a>
         </li>
 
@@ -134,21 +143,6 @@ export default function SocialLinks() {
           >
             <Mail className="size-4 text-primary" />
             <span>kinxly@gmail.com</span>
-          </a>
-        </li>
-
-        {/* WhatsApp / Phone */}
-        <li>
-          <a
-            target="_blank"
-            rel="noreferrer"
-            data-slot="badge"
-            data-variant="secondary"
-            className="group/badge inline-flex w-fit shrink-0 items-center justify-center overflow-hidden rounded-full border border-border/80 font-medium whitespace-nowrap outline-0 transition-all focus-visible:ring-3 focus-visible:ring-ring/50 bg-secondary text-secondary-foreground h-8 gap-2 px-3.5 text-xs sm:text-sm hover:border-primary/50 hover:bg-muted"
-            href="https://wa.me/2348100792853"
-          >
-            <Phone className="size-4 text-emerald-500" />
-            <span>+234 810 079 2853</span>
           </a>
         </li>
       </ul>
