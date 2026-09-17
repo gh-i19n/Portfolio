@@ -66,7 +66,7 @@ export default function Header() {
             <path d="m9.942 18.25 4.126-16.5h3.201l-4.125 16.5zm-7.212 0 4.125-16.5h3.202l-4.125 16.5z" />
           </svg>
           <span className="translate-y-px text-lg leading-none font-bold tracking-wider text-foreground">
-            KS
+            I19N
           </span>
         </Link>
 

@@ -137,10 +137,7 @@ export default function QuickMessageModal({ isOpen, onClose }: QuickMessageModal
               />
             </div>
 
-            <div className="flex items-center justify-between pt-3 border-t border-border">
-              <span className="text-[11px] text-muted-foreground">
-                Opens in your default email client
-              </span>
+            <div className="flex items-center justify-end pt-3 border-t border-border">
               <button
                 type="submit"
                 className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-xs sm:text-sm font-medium text-primary-foreground hover:brightness-105 transition-all shadow-xs cursor-pointer"
