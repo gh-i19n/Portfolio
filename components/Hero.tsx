@@ -4,6 +4,7 @@ import Image from 'next/image'
 import avatarPic from '@/public/profile-pic.png'
 import { Mail, Send } from 'lucide-react'
 import { motion } from 'motion/react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import DesignQuotes from './DesignQuotes'
 import SpiderWebBackground from './SpiderWebBackground'
 
@@ -12,23 +13,50 @@ interface HeroProps {
 }
 
 export default function Hero({ onOpenContact }: HeroProps) {
+  const sectionRef = useRef<HTMLElement>(null)
+  const [bgHeight, setBgHeight] = useState<number | null>(null)
+
+  // Measure the hero so the fixed backdrop keeps the exact same height.
+  useLayoutEffect(() => {
+    const update = () => {
+      const heroHeight = sectionRef.current?.offsetHeight ?? 0
+      if (!heroHeight) return
+      const isSm = window.matchMedia('(min-width: 640px)').matches
+      const topOffset = isSm ? 56 : 40 // main pt-14 / pt-10
+      setBgHeight(heroHeight + topOffset)
+    }
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, ease: 'easeOut' }}
-      className='relative pt-2 sm:pt-4'
-    >
-      {/* Subtle animated spider-web backdrop (decorative, non-interactive) */}
-      <SpiderWebBackground
-        className='absolute'
-        style={{
-          maskImage:
-            'radial-gradient(120% 105% at 100% 0%, black 25%, transparent 72%)',
-          WebkitMaskImage:
-            'radial-gradient(120% 105% at 100% 0%, black 25%, transparent 72%)',
-        }}
-      />
+    <>
+      {/* Subtle animated spider-web backdrop (decorative, non-interactive).
+          Fixed below the header so it stays visible on scroll.
+          Same height as the hero, full viewport width, behind content. */}
+      <div
+        aria-hidden='true'
+        className='pointer-events-none fixed inset-x-0 top-18 z-[-1] h-[520px] w-full sm:h-[580px]'
+        style={bgHeight ? { height: bgHeight } : undefined}
+      >
+        <SpiderWebBackground
+          className='absolute inset-0 h-full w-full'
+          style={{
+            maskImage:
+              'radial-gradient(120% 105% at 100% 0%, black 25%, transparent 72%)',
+            WebkitMaskImage:
+              'radial-gradient(120% 105% at 100% 0%, black 25%, transparent 72%)',
+          }}
+        />
+      </div>
+      <motion.section
+        ref={sectionRef}
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: 'easeOut' }}
+        className='relative pt-2 sm:pt-4'
+      >
 
       <div className='relative z-10'>
       {/* Top Row: Avatar on the left, subtle italic quote at top right corner */}
@@ -118,6 +146,7 @@ export default function Hero({ onOpenContact }: HeroProps) {
         </button>
       </div>
       </div>
-    </motion.section>
+      </motion.section>
+    </>
   )
 }

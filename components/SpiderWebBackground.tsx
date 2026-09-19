@@ -55,8 +55,8 @@ export default function SpiderWebBackground({
 
       const dark = document.documentElement.classList.contains('dark')
       const rgb = dark ? DARK_RGB : LIGHT_RGB
-      const anchorX = width * 1.02
-      const anchorY = -height * 0.18
+      const anchorX = width
+      const anchorY = 0
       const maxRadius =
         Math.hypot(anchorX + width * 0.05, anchorY - height * 1.05) + 24
 
@@ -121,6 +121,16 @@ export default function SpiderWebBackground({
         ctx.arc(point.x, point.y, 1.1 + hash01(dew * 31 + 7) * 0.9, 0, Math.PI * 2)
         ctx.fill()
       }
+
+      // Anchor node where all threads originate — kept on-screen.
+      ctx.beginPath()
+      ctx.arc(anchorX, anchorY, 7, 0, Math.PI * 2)
+      ctx.fillStyle = `rgba(${rgb},${dark ? 0.12 : 0.08})`
+      ctx.fill()
+      ctx.beginPath()
+      ctx.arc(anchorX, anchorY, 3.2, 0, Math.PI * 2)
+      ctx.fillStyle = `rgba(${rgb},${dark ? 0.55 : 0.45})`
+      ctx.fill()
     }
 
     let resizeQueued = false
@@ -151,7 +161,7 @@ export default function SpiderWebBackground({
     <canvas
       ref={canvasRef}
       aria-hidden='true'
-      className={`spider-web-sway pointer-events-none inset-0 h-full w-full ${className}`}
+      className={`spider-web-sway pointer-events-none block w-full ${className}`}
       style={style}
     />
   )

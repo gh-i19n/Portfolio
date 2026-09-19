@@ -13,7 +13,7 @@ export default function Page() {
   const [isContactOpen, setIsContactOpen] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-background text-foreground transition-colors selection:bg-primary/20 selection:text-primary">
+    <div className="min-h-screen flex flex-col justify-between overflow-x-clip bg-background text-foreground transition-colors selection:bg-primary/20 selection:text-primary">
       {/* Top sticky navigation bar */}
       <Header />
 
@@ -22,7 +22,7 @@ export default function Page() {
         <div
           data-slot="container"
           data-variant="default"
-          className="mx-auto w-full px-4 sm:px-8 max-w-5xl space-y-16 sm:space-y-20"
+          className="mx-auto w-full px-4 sm:px-8 max-w-5xl space-y-16 sm:space-y-20 relative z-0"
         >
           {/* Hero Section (includes top-right italic quote) */}
           <Hero
