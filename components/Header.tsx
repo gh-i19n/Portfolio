@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Moon, Sun, Clock } from 'lucide-react'
 import Image from 'next/image'
-import logo from '@/public/header-logo.png'
+import logoLight from '@/public/header-logo.png'
+import logoDark from '@/public/header-logo-dark.png'
 
 export default function Header() {
   const [isDark, setIsDark] = useState(false)
@@ -59,12 +60,21 @@ export default function Header() {
           className='group/button inline-flex shrink-0 items-center justify-center rounded border border-transparent text-sm font-medium whitespace-nowrap transition-all outline-none select-none h-16 px-2.5 -ml-2.5 gap-1.5 hover:bg-transparent'
         >
           <Image
-            alt='Kingsley Solomon'
-            src={logo}
+            alt='i19n - Kingsley Solomon'
+            src={logoLight}
             width={180}
-            height={80}
+            height={129}
             priority
-            className='size-full rounded-full object-cover'
+            className='block h-9 w-auto bg-transparent dark:hidden'
+            referrerPolicy='no-referrer'
+          />
+          <Image
+            alt='i19n - Kingsley Solomon'
+            src={logoDark}
+            width={180}
+            height={129}
+            priority
+            className='hidden h-9 w-auto bg-transparent dark:block'
             referrerPolicy='no-referrer'
           />
         </Link>

@@ -223,7 +223,7 @@ export default function Projects() {
         </p>
       </div>
 
-      <div className='grid gap-4 sm:grid-cols-2 sm:gap-5'>
+      <div className='grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5 min-w-0'>
         {PROJECTS.map((project) => {
           const isDev = project.isInDevelopment
           return (
@@ -231,105 +231,99 @@ export default function Projects() {
               key={project.id}
               data-slot='card'
               onClick={isDev ? () => setSelectedProject(project) : undefined}
-              className={`group/card relative flex flex-col justify-between gap-3.5 overflow-hidden p-5 text-sm text-card-foreground rounded-xl border transition-all duration-200 ${
+              className={`group/card relative flex flex-col justify-between gap-3 sm:gap-3.5 overflow-hidden p-4 sm:p-5 text-sm text-card-foreground rounded-xl border transition-all duration-200 min-w-0 w-full ${
                 isDev
                   ? 'border-dashed border-border/90 bg-card/70 hover:border-amber-500/60 hover:bg-card hover:shadow-xs cursor-pointer'
                   : 'border-border bg-card hover:border-primary/50 hover:shadow-xs'
               }`}
             >
-              {/* Header: Logo placeholder + Title & Role + Minimalist Status Tag */}
+              {/* Header: Logo + Title + Meta (mobile-first, wraps cleanly) */}
               <div
-                className='flex items-start justify-between gap-3 min-w-0'
+                className='flex items-start gap-2.5 sm:gap-3 min-w-0'
                 data-slot='card-header'
               >
-                <div className='flex items-start gap-3 min-w-0 flex-1'>
-                  {/* Brand Logo Placeholder */}
-                  {/* <div
-                    className={`shrink-0 size-9 rounded-md border flex items-center justify-center font-mono text-xs font-bold tracking-tight select-none shadow-2xs mt-0.5 ${project.logoStyle}`}
-                    title={`${project.title} logo`}
-                  > */}
-                  <div className='relative size-5 sm:size-10 overflow-hidden rounded-full border-2 border-border/80 bg-muted shadow-sm'>
-                    <Image
-                      alt='Kingsley Solomon'
-                      src={project.logoText}
-                      width={20}
-                      height={20}
-                      priority
-                      className='size-full rounded-full object-cover'
-                      referrerPolicy='no-referrer'
-                    />
-                  </div>
-                  {/* </div> */}
+                <div className='relative size-10 shrink-0 overflow-hidden rounded-full border border-border/80 bg-muted shadow-sm'>
+                  <Image
+                    alt={`${project.title} logo`}
+                    src={project.logoText}
+                    width={80}
+                    height={80}
+                    sizes='40px'
+                    priority={false}
+                    className='size-full rounded-full object-cover'
+                    referrerPolicy='no-referrer'
+                  />
+                </div>
 
-                  {/* Title & Role */}
-                  <div className='min-w-0 flex-1'>
+                {/* Title + meta */}
+                <div className='min-w-0 flex-1'>
+                  <div className='flex items-start gap-2 min-w-0'>
                     <h3
                       data-slot='card-title'
-                      className='font-heading text-base font-semibold text-foreground group-hover/card:text-primary transition-colors whitespace-nowrap truncate min-w-0'
+                      className='font-heading text-[15px] sm:text-base font-semibold leading-snug text-foreground group-hover/card:text-primary transition-colors truncate min-w-0 flex-1'
                     >
                       {isDev ? (
-                        <span className='flex items-center gap-1.5'>
-                          <span>{project.title}</span>
-                        </span>
+                        <span>{project.title}</span>
                       ) : (
                         <a
                           href={project.url}
                           target='_blank'
                           rel='noreferrer'
-                          className='after:absolute after:inset-0 outline-none focus-visible:ring-2 focus-visible:ring-ring/50'
+                          className='after:absolute after:inset-0 outline-none focus-visible:ring-2 focus-visible:ring-ring/50 rounded-sm'
                         >
                           {project.title}
                         </a>
                       )}
                     </h3>
 
-                    {/* Role badge and domain */}
-                    <div className='flex items-center gap-1.5 text-xs text-muted-foreground mt-0.5 font-mono'>
-                      <span className='inline-flex items-center font-medium text-foreground/90 bg-secondary/80 px-1.5 py-0.5 rounded border border-border/70 text-[10.5px] leading-none'>
-                        {project.role}
-                      </span>
-                      <span className='text-muted-foreground/40'>•</span>
-                      <span className='truncate text-muted-foreground/75 text-[11px]'>
-                        {project.displayUrl}
-                      </span>
-                    </div>
+                    {isDev ? (
+                      <Sparkles className='size-4 shrink-0 mt-0.5 text-amber-500/70 transition-transform group-hover/card:scale-110' />
+                    ) : (
+                      <ArrowUpRight className='size-4 shrink-0 mt-0.5 text-muted-foreground/50 transition-all duration-200 group-hover/card:text-primary group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5' />
+                    )}
                   </div>
-                </div>
 
-                {/* Sleek status badge & indicator */}
-                <div className='flex items-center gap-2 shrink-0 pt-0.5'>
-                  <span
-                    className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-medium whitespace-nowrap ${
-                      isDev
-                        ? 'border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400'
-                        : 'border-border/70 bg-secondary/50 text-muted-foreground'
-                    }`}
-                  >
+                  {/* Role • domain • status — wraps on small screens */}
+                  <div className='flex flex-wrap items-center gap-x-1.5 gap-y-1.5 mt-1.5 font-mono min-w-0'>
+                    <span className='inline-flex items-center shrink-0 font-medium text-foreground/90 bg-secondary/80 px-1.5 py-0.5 rounded border border-border/70 text-[10px] sm:text-[10.5px] leading-none max-w-full truncate'>
+                      {project.role}
+                    </span>
                     <span
-                      className={`size-1.5 rounded-full ${project.statusDotColor}`}
-                    />
-                    <span>{project.status}</span>
-                  </span>
-
-                  {isDev ? (
-                    <Sparkles className='size-4 text-amber-500/70 transition-transform group-hover/card:scale-110' />
-                  ) : (
-                    <ArrowUpRight className='size-4 text-muted-foreground/50 transition-all duration-200 group-hover/card:text-primary group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5' />
-                  )}
+                      aria-hidden
+                      className='text-muted-foreground/40 shrink-0'
+                    >
+                      •
+                    </span>
+                    <span className='truncate text-muted-foreground/75 text-[11px] min-w-0 max-w-[140px] sm:max-w-none'>
+                      {project.displayUrl}
+                    </span>
+                    <span
+                      className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10px] sm:text-[11px] font-medium whitespace-nowrap shrink-0 ${
+                        isDev
+                          ? 'border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400'
+                          : 'border-border/70 bg-secondary/50 text-muted-foreground'
+                      }`}
+                    >
+                      <span
+                        className={`size-1.5 rounded-full shrink-0 ${project.statusDotColor}`}
+                      />
+                      <span>{project.status}</span>
+                    </span>
+                  </div>
                 </div>
               </div>
 
               {/* Project Summary */}
               <div
-                className='text-sm leading-relaxed text-muted-foreground'
+                className='text-[13.5px] sm:text-sm leading-relaxed text-muted-foreground text-pretty break-words'
                 data-slot='card-content'
               >
                 <p>{project.summary}</p>
               </div>
 
               {/* Footer with Tech Stack and Architecture details trigger */}
-              <div className='pt-3 flex items-center justify-between border-t border-border/50 text-xs text-muted-foreground'>
-                <span className='font-mono text-muted-foreground/80 truncate max-w-[210px] sm:max-w-[240px]'>
+              <div className='pt-3 flex items-center gap-2 border-t border-border/50 text-xs text-muted-foreground min-w-0'>
+                <span className='font-mono text-muted-foreground/80 truncate min-w-0 flex-1'>
                   {project.stack.slice(0, 3).join(' • ')}
                 </span>
                 <button
@@ -339,7 +333,7 @@ export default function Projects() {
                     e.preventDefault()
                     setSelectedProject(project)
                   }}
-                  className={`relative z-10 inline-flex items-center gap-1 text-xs font-medium transition-colors cursor-pointer px-2 py-1 rounded ${
+                  className={`relative z-10 inline-flex shrink-0 items-center justify-center gap-1 min-h-[36px] min-w-[44px] touch-manipulation text-xs font-medium transition-colors cursor-pointer px-2.5 py-1.5 -mr-1 rounded-md active:scale-95 ${
                     isDev
                       ? 'text-amber-600 dark:text-amber-400 hover:bg-amber-500/15'
                       : 'text-muted-foreground hover:text-foreground hover:bg-muted'
@@ -350,8 +344,10 @@ export default function Projects() {
                       : 'View Architecture Details'
                   }
                 >
-                  <Info className='size-3.5' />
-                  <span>{isDev ? 'Dev Specs' : 'Architecture'}</span>
+                  <Info className='size-3.5 shrink-0' />
+                  <span className='whitespace-nowrap'>
+                    {isDev ? 'Dev Specs' : 'Architecture'}
+                  </span>
                 </button>
               </div>
             </article>
