@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import {
   X,
@@ -39,12 +39,6 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
   useEffect(() => {
     if (!project) return
     const onKey = (e: KeyboardEvent) => {
@@ -59,7 +53,9 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     }
   }, [project, onClose])
 
-  if (!mounted) return null
+  if (!project) return null
+  // Portals need document.body, which doesn't exist during prerender.
+  if (typeof document === 'undefined') return null
 
   // Portaled to document.body so the dialog escapes the page container's
   // stacking context and always renders above the sticky header.

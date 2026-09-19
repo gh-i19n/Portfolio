@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X, Send, Mail, Check, Copy } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -19,13 +19,10 @@ export default function QuickMessageModal({ isOpen, onClose }: QuickMessageModal
   const [companyField, setCompanyField] = useState(''); // honeypot — must stay empty
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
-  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!isOpen || !mounted) return null;
+  if (!isOpen) return null;
+  // Portals need document.body, which doesn't exist during prerender.
+  if (typeof document === 'undefined') return null;
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText('kinxly@gmail.com');
