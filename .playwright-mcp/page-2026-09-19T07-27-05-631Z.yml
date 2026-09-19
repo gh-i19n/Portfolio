@@ -1,0 +1,173 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - link "Home" [ref=e5] [cursor=pointer]:
+          - /url: /
+          - img "i19n - Kingsley Solomon" [ref=e6]
+        - generic [ref=e7]:
+          - generic [ref=e11]: Lagos, NG
+          - generic [ref=e12]: •
+          - generic [ref=e16]: 8:26 AM
+        - button "Toggle theme" [ref=e18]
+    - main [ref=e22]:
+      - generic [ref=e23]:
+        - generic [ref=e25]:
+          - generic [ref=e26]:
+            - generic [ref=e27]:
+              - img "Kingsley Solomon" [ref=e29]
+              - generic "Active & Available" [ref=e30]
+            - note "Design philosophy quote" [ref=e32]:
+              - generic [ref=e310]:
+                - paragraph [ref=e311]: “Less, but better.”
+                - generic [ref=e312]: — Dieter Rams
+          - heading "Hey, I'm Kingsley Solomon!" [level=1] [ref=e36]
+          - generic [ref=e37]:
+            - paragraph [ref=e38]:
+              - generic [ref=e39]: A full stack software engineer and web developer
+            - paragraph [ref=e40]: Specializing in scalable distributed systems with Java / Spring Boot & Node.js, responsive frontend architectures using React & Next.js, and modern agentic AI integration.
+            - generic [ref=e41]: Open for high-impact software engineering roles & technical consulting.
+          - generic [ref=e45]:
+            - link "Send email" [ref=e46] [cursor=pointer]:
+              - /url: mailto:kinxly@gmail.com
+            - button "Send quick note" [ref=e51] [cursor=pointer]
+        - generic [ref=e56]:
+          - generic [ref=e57]:
+            - heading "Projects" [level=2] [ref=e58]
+            - paragraph [ref=e59]: "Flagship production platforms, scalable products, and distributed systems I've engineered:"
+          - generic [ref=e60]:
+            - article [ref=e61]:
+              - generic [ref=e62]:
+                - img "Techstudio HRIS logo" [ref=e64]
+                - generic [ref=e65]:
+                  - heading [level=3] [ref=e67]:
+                    - link "Techstudio HRIS" [ref=e68] [cursor=pointer]:
+                      - /url: https://techstudiohr.com
+                  - generic [ref=e72]:
+                    - generic [ref=e73]: Lead
+                    - generic [ref=e74]: •
+                    - generic [ref=e75]: techstudiohr.com
+                    - generic [ref=e76]: Production
+              - paragraph [ref=e80]: Human Resources Information System managing employee records, payroll automation, and enterprise workforce workflows.
+              - generic [ref=e81]:
+                - generic [ref=e82]: Next.js • React • Node.js
+                - button "Architecture" [ref=e83] [cursor=pointer]
+            - article [ref=e87]:
+              - generic [ref=e88]:
+                - img "ByteAlley logo" [ref=e90]
+                - generic [ref=e91]:
+                  - heading [level=3] [ref=e93]:
+                    - link "ByteAlley" [ref=e94] [cursor=pointer]:
+                      - /url: https://trybytealley.com
+                  - generic [ref=e98]:
+                    - generic [ref=e99]: Lead
+                    - generic [ref=e100]: •
+                    - generic [ref=e101]: trybytealley.com
+                    - generic [ref=e102]: Production
+              - paragraph [ref=e106]: Creator-focused digital marketplace enabling creators to showcase, distribute, and monetize software, templates, and digital assets.
+              - generic [ref=e107]:
+                - generic [ref=e108]: React • Next.js • Node.js
+                - button "Architecture" [ref=e109] [cursor=pointer]
+            - article [ref=e113]:
+              - generic [ref=e114]:
+                - img "ClapMi logo" [ref=e116]
+                - generic [ref=e117]:
+                  - heading [level=3] [ref=e119]:
+                    - link "ClapMi" [ref=e120] [cursor=pointer]:
+                      - /url: https://clapmi.com
+                  - generic [ref=e124]:
+                    - generic [ref=e125]: Contributor & Consultant
+                    - generic [ref=e126]: •
+                    - generic [ref=e127]: clapmi.com
+                    - generic [ref=e128]: Production
+              - paragraph [ref=e132]: High-concurrency live streaming and SocialFi platform where content creators engage live audiences and monetize attention in real time.
+              - generic [ref=e133]:
+                - generic [ref=e134]: Nuxt.js • Vue.js • Node.js
+                - button "Architecture" [ref=e135] [cursor=pointer]
+            - article [ref=e139]:
+              - generic [ref=e140]:
+                - img "Techstudio Academy logo" [ref=e142]
+                - generic [ref=e143]:
+                  - heading [level=3] [ref=e145]:
+                    - link "Techstudio Academy" [ref=e146] [cursor=pointer]:
+                      - /url: https://techstudioacademy.com
+                  - generic [ref=e150]:
+                    - generic [ref=e151]: Lead
+                    - generic [ref=e152]: •
+                    - generic [ref=e153]: techstudioacademy.com
+                    - generic [ref=e154]: Production
+              - paragraph [ref=e158]: Technology training platform focused on practical, industry-relevant software engineering and development education.
+              - generic [ref=e159]:
+                - generic [ref=e160]: React • TypeScript • Node.js
+                - button "Architecture" [ref=e161] [cursor=pointer]
+            - article [ref=e165]:
+              - generic [ref=e166]:
+                - img "Alumni Network logo" [ref=e168]
+                - generic [ref=e169]:
+                  - heading [level=3] [ref=e171]:
+                    - link "Alumni Network" [ref=e172] [cursor=pointer]:
+                      - /url: https://bcc007-group.org
+                  - generic [ref=e176]:
+                    - generic [ref=e177]: Consultant
+                    - generic [ref=e178]: •
+                    - generic [ref=e179]: bcc007-group.org
+                    - generic [ref=e180]: Production
+              - paragraph [ref=e184]: Invite-only institutional alumni platform for managing membership directories, dues, endowment donations, and RSVP events.
+              - generic [ref=e185]:
+                - generic [ref=e186]: Next.js • React • Node.js
+                - button "Architecture" [ref=e187] [cursor=pointer]
+            - article [ref=e191] [cursor=pointer]:
+              - generic [ref=e192]:
+                - img "Eventorch logo" [ref=e194]
+                - generic [ref=e195]:
+                  - heading "Eventorch" [level=3] [ref=e197]
+                  - generic [ref=e201]:
+                    - generic [ref=e202]: Lead
+                    - generic [ref=e203]: •
+                    - generic [ref=e204]: eventorch.app
+                    - generic [ref=e205]: In Development
+              - paragraph [ref=e209]: Corporate event planning platform managing multi-track conference agendas, vendor RFP workflows, and real-time attendee registration.
+              - generic [ref=e210]:
+                - generic [ref=e211]: Next.js • React • Java / Spring Boot
+                - button "Dev Specs" [ref=e212]
+        - generic [ref=e216]:
+          - generic [ref=e217]:
+            - heading "Find me on" [level=2] [ref=e218]
+            - paragraph [ref=e219]: "Connect, explore codebases, or review my technical profiles:"
+          - list [ref=e220]:
+            - listitem [ref=e221]:
+              - link "GitHub" [ref=e222] [cursor=pointer]:
+                - /url: https://github.com/gh-i19n
+            - listitem [ref=e227]:
+              - link "LinkedIn" [ref=e228] [cursor=pointer]:
+                - /url: https://linkedin.com/in/i19n
+            - listitem [ref=e233]:
+              - link "Twitter / X" [ref=e234] [cursor=pointer]:
+                - /url: https://x.com/i19n_dev
+            - listitem [ref=e238]:
+              - link "kinxly@gmail.com" [ref=e239] [cursor=pointer]:
+                - /url: mailto:kinxly@gmail.com
+        - generic [ref=e244]:
+          - heading "Get in touch" [level=2] [ref=e246]
+          - generic [ref=e247]:
+            - paragraph [ref=e248]:
+              - generic [ref=e249]: You can reach me anytime at
+              - link "kinxly@gmail.com" [ref=e250] [cursor=pointer]:
+                - /url: mailto:kinxly@gmail.com
+              - button "Copy email address" [ref=e252] [cursor=pointer]
+            - generic [ref=e256]:
+              - generic [ref=e261]:
+                - text: Have an ambitious project or engineering need?
+                - paragraph [ref=e262]: Available for full stack contracts, architecture advisory, and technical leadership.
+              - button "Send Quick Note" [ref=e263] [cursor=pointer]
+    - contentinfo [ref=e268]:
+      - generic [ref=e269]:
+        - paragraph [ref=e270]:
+          - generic [ref=e271]: © 2026 Built with
+          - generic [ref=e274]: by Kingsley Solomon
+        - paragraph [ref=e275]:
+          - generic [ref=e276]: Design inspired by
+          - link "Andrei Hudovich" [ref=e277] [cursor=pointer]:
+            - /url: https://hudovich.com/
+  - button "Open Next.js Dev Tools" [ref=e291] [cursor=pointer]
+  - alert [ref=e282]: Kingsley Solomon - Full Stack Software Engineer

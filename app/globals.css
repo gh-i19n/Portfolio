@@ -117,3 +117,26 @@
 .max-w-180 {
   max-width: 46rem;
 }
+
+@keyframes spider-web-sway {
+  from {
+    transform: translate3d(-3px, 1px, 0) rotate(-0.35deg);
+  }
+  to {
+    transform: translate3d(4px, -2px, 0) rotate(0.4deg);
+  }
+}
+
+.spider-web-sway {
+  transform: translate3d(-3px, 1px, 0) rotate(-0.35deg);
+  transform-origin: 102% -18%;
+  will-change: transform;
+  animation: spider-web-sway 10s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spider-web-sway {
+    animation: none;
+    will-change: auto;
+  }
+}

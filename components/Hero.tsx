@@ -21,6 +21,7 @@ export default function Hero({ onOpenContact }: HeroProps) {
     >
       {/* Subtle animated spider-web backdrop (decorative, non-interactive) */}
       <SpiderWebBackground
+        className='absolute'
         style={{
           maskImage:
             'radial-gradient(120% 105% at 100% 0%, black 25%, transparent 72%)',
