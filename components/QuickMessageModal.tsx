@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { X, Send, Mail, Check, Copy } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -15,8 +16,16 @@ export default function QuickMessageModal({ isOpen, onClose }: QuickMessageModal
   const [messageTopic, setMessageTopic] = useState('Full Stack Engineering Role');
   const [messageBody, setMessageBody] = useState('');
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [companyField, setCompanyField] = useState(''); // honeypot — must stay empty
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [mounted, setMounted] = useState(false);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!isOpen || !mounted) return null;
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText('kinxly@gmail.com');
@@ -24,23 +33,54 @@ export default function QuickMessageModal({ isOpen, onClose }: QuickMessageModal
     setTimeout(() => setCopiedEmail(false), 2000);
   };
 
-  const handleSendViaEmail = (e: React.FormEvent) => {
-    e.preventDefault();
-    const subject = encodeURIComponent(`[${messageTopic}] Inquiry from ${senderName || 'Prospective Partner'}`);
-    const body = encodeURIComponent(
-      `Hello Kingsley,\n\n${messageBody || "I'd like to connect regarding an engineering opportunity."}\n\nBest regards,\n${senderName}\n${senderEmail}`
-    );
-    window.location.href = `mailto:kinxly@gmail.com?subject=${subject}&body=${body}`;
+  const handleClose = () => {
+    onClose();
+    // Reset the success view after the close animation so reopening starts fresh.
+    setTimeout(() => {
+      setStatus('idle');
+      setErrorMessage('');
+    }, 300);
   };
 
-  return (
+  const handleSendNote = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (status === 'sending') return;
+    setStatus('sending');
+    setErrorMessage('');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: senderName,
+          email: senderEmail,
+          topic: messageTopic,
+          message: messageBody,
+          company: companyField,
+        }),
+      });
+      const data = (await res.json().catch(() => null)) as { error?: string } | null;
+      if (!res.ok) {
+        throw new Error(data?.error || 'Could not send the message. Please try again.');
+      }
+      setStatus('sent');
+      setSenderName('');
+      setSenderEmail('');
+      setMessageBody('');
+    } catch (err) {
+      setStatus('error');
+      setErrorMessage(err instanceof Error ? err.message : 'Could not send the message.');
+    }
+  };
+
+  return createPortal(
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+      <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onClick={onClose}
+          onClick={handleClose}
           className="fixed inset-0 bg-background/80 backdrop-blur-sm transition-opacity"
         />
 
@@ -63,7 +103,7 @@ export default function QuickMessageModal({ isOpen, onClose }: QuickMessageModal
             </div>
             <button
               type="button"
-              onClick={onClose}
+              onClick={handleClose}
               className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-pointer"
             >
               <X className="size-4" />
@@ -86,7 +126,36 @@ export default function QuickMessageModal({ isOpen, onClose }: QuickMessageModal
             </button>
           </div>
 
-          <form onSubmit={handleSendViaEmail} className="space-y-3.5 text-xs">
+          {status === 'sent' ? (
+            <div className="py-8 text-center">
+              <span className="mx-auto mb-3 flex size-10 items-center justify-center rounded-full bg-emerald-500/15">
+                <Check className="size-5 text-emerald-500" />
+              </span>
+              <p className="text-sm font-medium text-foreground">Message sent</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Thanks for reaching out — I&apos;ll get back to you shortly.
+              </p>
+              <button
+                type="button"
+                onClick={handleClose}
+                className="mt-5 inline-flex items-center rounded-md border border-border bg-secondary px-3.5 py-2 text-xs sm:text-sm font-medium text-secondary-foreground hover:bg-muted transition-all cursor-pointer"
+              >
+                Close
+              </button>
+            </div>
+          ) : (
+          <form onSubmit={handleSendNote} className="space-y-3.5 text-xs">
+            {/* Honeypot — invisible to humans, bots fill it and get silently accepted. */}
+            <input
+              type="text"
+              name="company"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              value={companyField}
+              onChange={(e) => setCompanyField(e.target.value)}
+              className="hidden"
+            />
             <div>
               <label className="block text-foreground font-medium mb-1">Your Name</label>
               <input
@@ -137,18 +206,24 @@ export default function QuickMessageModal({ isOpen, onClose }: QuickMessageModal
               />
             </div>
 
-            <div className="flex items-center justify-end pt-3 border-t border-border">
+            <div className="flex items-center justify-between pt-3 border-t border-border gap-3">
+              {status === 'error' && (
+                <p className="text-xs text-destructive">{errorMessage}</p>
+              )}
               <button
                 type="submit"
-                className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-xs sm:text-sm font-medium text-primary-foreground hover:brightness-105 transition-all shadow-xs cursor-pointer"
+                disabled={status === 'sending'}
+                className="ml-auto inline-flex items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-xs sm:text-sm font-medium text-primary-foreground hover:brightness-105 transition-all shadow-xs cursor-pointer disabled:opacity-60 disabled:cursor-default"
               >
                 <Send className="size-3.5" />
-                <span>Send Note</span>
+                <span>{status === 'sending' ? 'Sending…' : 'Send Note'}</span>
               </button>
             </div>
           </form>
+          )}
         </motion.div>
       </div>
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }

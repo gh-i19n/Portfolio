@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import {
   X,
   ExternalLink,
@@ -38,6 +39,12 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   useEffect(() => {
     if (!project) return
     const onKey = (e: KeyboardEvent) => {
@@ -52,10 +59,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     }
   }, [project, onClose])
 
-  return (
+  if (!mounted) return null
+
+  // Portaled to document.body so the dialog escapes the page container's
+  // stacking context and always renders above the sticky header.
+  return createPortal(
     <AnimatePresence>
       {project && (
-        <div className='fixed inset-0 z-50 flex items-end justify-center p-3 sm:items-center sm:p-6 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:pb-6'>
+        <div className='fixed inset-0 z-[100] flex items-end justify-center p-3 sm:items-center sm:p-6 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:pb-6'>
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -221,6 +232,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   )
 }
