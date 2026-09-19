@@ -5,6 +5,7 @@ import avatarPic from '@/public/profile-pic.png'
 import { Mail, Send } from 'lucide-react'
 import { motion } from 'motion/react'
 import DesignQuotes from './DesignQuotes'
+import SpiderWebBackground from './SpiderWebBackground'
 
 interface HeroProps {
   onOpenContact: () => void
@@ -16,8 +17,19 @@ export default function Hero({ onOpenContact }: HeroProps) {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, ease: 'easeOut' }}
-      className='pt-2 sm:pt-4'
+      className='relative pt-2 sm:pt-4'
     >
+      {/* Subtle animated spider-web backdrop (decorative, non-interactive) */}
+      <SpiderWebBackground
+        style={{
+          maskImage:
+            'radial-gradient(120% 105% at 100% 0%, black 25%, transparent 72%)',
+          WebkitMaskImage:
+            'radial-gradient(120% 105% at 100% 0%, black 25%, transparent 72%)',
+        }}
+      />
+
+      <div className='relative z-10'>
       {/* Top Row: Avatar on the left, subtle italic quote at top right corner */}
       <div className='flex items-start justify-between gap-4 mb-6 sm:mb-8'>
         <div className='relative inline-block shrink-0'>
@@ -57,19 +69,8 @@ export default function Hero({ onOpenContact }: HeroProps) {
       <div className='mb-8 sm:mb-10 space-y-4 sm:space-y-5 text-foreground/90'>
         <p className='flex items-center flex-wrap gap-2 text-base sm:text-lg text-foreground font-medium'>
           <span>
-            A full stack software engineer based in Lagos,&nbsp;Nigeria
+            A full stack software engineer and web developer
           </span>
-          {/* Nigeria Flag SVG */}
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            viewBox='0 0 12 8'
-            className='inline-block h-3.5 w-5 shrink-0 rounded-xs shadow-xs overflow-hidden'
-            aria-label='Nigeria Flag'
-          >
-            <rect width='4' height='8' fill='#008751' />
-            <rect x='4' width='4' height='8' fill='#FFFFFF' />
-            <rect x='8' width='4' height='8' fill='#008751' />
-          </svg>
         </p>
 
         <p className='text-sm sm:text-base leading-relaxed text-muted-foreground max-w-2xl'>
@@ -114,6 +115,7 @@ export default function Hero({ onOpenContact }: HeroProps) {
           <Send className='size-4' />
           <span>Send quick note</span>
         </button>
+      </div>
       </div>
     </motion.section>
   )
