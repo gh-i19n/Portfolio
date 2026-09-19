@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import Analytics from '@/components/Analytics'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://i19n.dev'),
   title: 'Kingsley Solomon - Full Stack Software Engineer',
   description:
     'Portfolio of Ifijeh Kingsley Solomon, Full Stack Software Engineer specializing in React, Next.js, Java, Spring Boot, Node.js, and Agentic Systems.',
@@ -57,6 +59,7 @@ export default function RootLayout({
       </head>
       <body className='min-h-screen bg-background font-base text-base text-muted-foreground antialiased selection:bg-primary/20 selection:text-primary'>
         {children}
+        <Analytics />
       </body>
     </html>
   )

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X, Send, Mail, Check, Copy } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { trackEvent } from '@/lib/analytics';
 
 interface QuickMessageModalProps {
   isOpen: boolean;
@@ -61,6 +62,7 @@ export default function QuickMessageModal({ isOpen, onClose }: QuickMessageModal
         throw new Error(data?.error || 'Could not send the message. Please try again.');
       }
       setStatus('sent');
+      trackEvent('message_sent', { topic: messageTopic });
       setSenderName('');
       setSenderEmail('');
       setMessageBody('');

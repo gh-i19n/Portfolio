@@ -1,6 +1,7 @@
 'use client';
 
 import { Mail } from 'lucide-react';
+import { trackEvent } from '@/lib/analytics';
 
 export default function SocialLinks() {
   return (
@@ -24,6 +25,7 @@ export default function SocialLinks() {
             data-variant="secondary"
             className="group/badge inline-flex w-fit shrink-0 items-center justify-center overflow-hidden rounded-full border border-border/80 font-medium whitespace-nowrap outline-0 transition-all focus-visible:ring-3 focus-visible:ring-ring/50 bg-secondary text-secondary-foreground h-8 gap-2 px-3.5 text-xs sm:text-sm hover:border-primary/50 hover:bg-muted"
             href="https://github.com/gh-i19n"
+            onClick={() => trackEvent('social_clicked', { network: 'github' })}
           >
             {/* Exact GitHub SVG */}
             <svg
@@ -65,6 +67,7 @@ export default function SocialLinks() {
             data-variant="secondary"
             className="group/badge inline-flex w-fit shrink-0 items-center justify-center overflow-hidden rounded-full border border-border/80 font-medium whitespace-nowrap outline-0 transition-all focus-visible:ring-3 focus-visible:ring-ring/50 bg-secondary text-secondary-foreground h-8 gap-2 px-3.5 text-xs sm:text-sm hover:border-primary/50 hover:bg-muted"
             href="https://linkedin.com/in/i19n"
+            onClick={() => trackEvent('social_clicked', { network: 'linkedin' })}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -118,6 +121,7 @@ export default function SocialLinks() {
             data-variant="secondary"
             className="group/badge inline-flex w-fit shrink-0 items-center justify-center overflow-hidden rounded-full border border-border/80 font-medium whitespace-nowrap outline-0 transition-all focus-visible:ring-3 focus-visible:ring-ring/50 bg-secondary text-secondary-foreground h-8 gap-2 px-3.5 text-xs sm:text-sm hover:border-primary/50 hover:bg-muted"
             href="https://x.com/i19n_dev"
+            onClick={() => trackEvent('social_clicked', { network: 'x' })}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -140,6 +144,7 @@ export default function SocialLinks() {
             data-variant="secondary"
             className="group/badge inline-flex w-fit shrink-0 items-center justify-center overflow-hidden rounded-full border border-border/80 font-medium whitespace-nowrap outline-0 transition-all focus-visible:ring-3 focus-visible:ring-ring/50 bg-secondary text-secondary-foreground h-8 gap-2 px-3.5 text-xs sm:text-sm hover:border-primary/50 hover:bg-muted"
             href="mailto:kinxly@gmail.com"
+            onClick={() => trackEvent('social_clicked', { network: 'email' })}
           >
             <Mail className="size-4 text-primary" />
             <span>kinxly@gmail.com</span>

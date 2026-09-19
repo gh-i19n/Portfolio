@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import ProjectModal, { ProjectItem } from './ProjectModal'
 import { ArrowUpRight, Info, Sparkles } from 'lucide-react'
+import { trackEvent } from '@/lib/analytics'
 import Image from 'next/image'
 import tsaLogo from '@/public/tsa-logo.png'
 import byteAlley from '@/public/bytealley-logo.png'
@@ -211,6 +212,11 @@ export default function Projects() {
     null,
   )
 
+  const openProject = (project: ProjectItem) => {
+    trackEvent('project_viewed', { project_id: project.id })
+    setSelectedProject(project)
+  }
+
   return (
     <section className='@container/projects'>
       <div className='mb-6'>
@@ -230,7 +236,7 @@ export default function Projects() {
             <article
               key={project.id}
               data-slot='card'
-              onClick={isDev ? () => setSelectedProject(project) : undefined}
+              onClick={isDev ? () => openProject(project) : undefined}
               className={`group/card relative flex flex-col justify-between gap-3 sm:gap-3.5 overflow-hidden p-4 sm:p-5 text-sm text-card-foreground rounded-xl border transition-all duration-200 min-w-0 w-full ${
                 isDev
                   ? 'border-dashed border-border/90 bg-card/70 hover:border-amber-500/60 hover:bg-card hover:shadow-xs cursor-pointer'
@@ -331,7 +337,7 @@ export default function Projects() {
                   onClick={(e) => {
                     e.stopPropagation()
                     e.preventDefault()
-                    setSelectedProject(project)
+                    openProject(project)
                   }}
                   className={`relative z-10 inline-flex shrink-0 items-center justify-center gap-1 min-h-[36px] min-w-[44px] touch-manipulation text-xs font-medium transition-colors cursor-pointer px-2.5 py-1.5 -mr-1 rounded-md active:scale-95 ${
                     isDev

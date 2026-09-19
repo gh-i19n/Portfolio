@@ -11,6 +11,7 @@ import {
   Cpu,
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'motion/react'
+import { trackEvent } from '@/lib/analytics'
 import Image from 'next/image';
 
 export interface ProjectItem {
@@ -211,6 +212,11 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   href={project.url}
                   target='_blank'
                   rel='noreferrer'
+                  onClick={() =>
+                    trackEvent('project_demo_clicked', {
+                      project_id: project.id,
+                    })
+                  }
                   className='inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 min-h-[44px] py-2.5 text-sm font-medium text-primary-foreground hover:brightness-105 active:scale-[0.98] transition-all shadow-xs cursor-pointer touch-manipulation w-full sm:w-auto'
                 >
                   <span>Visit Live Platform</span>

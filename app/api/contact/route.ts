@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import * as Sentry from '@sentry/nextjs'
 
 const TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'kinxly@gmail.com'
 const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || 'onboarding@resend.dev'
@@ -88,7 +89,8 @@ export async function POST(req: NextRequest) {
       )
     }
     return NextResponse.json({ ok: true })
-  } catch {
+  } catch (err) {
+    Sentry.captureException(err)
     return NextResponse.json(
       { error: 'Could not deliver the message. Please try again.' },
       { status: 502 },
