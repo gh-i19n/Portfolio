@@ -5,6 +5,9 @@ import { useEffect, useState } from 'react';
 
 const CONSENT_KEY = 'ga-consent';
 
+// ARCHIVED (GA4): false disables all GA4 loading/sends while preserving code for reference.
+const GA4_ENABLED = false;
+
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
@@ -12,6 +15,11 @@ declare global {
 }
 
 /**
+ * ARCHIVED (GA4) — preserved for educational/reference purposes, currently disabled.
+ * GA4_ENABLED=false below prevents any GA script loading or gtag sends.
+ * Original implementation kept intact for study; see NEXT_PUBLIC_GA_ID in .env.example.
+ *
+ * Original docs:
  * GA4 loader + first-party consent banner.
  * - Consent defaults to denied (cookieless pings only) until the visitor accepts.
  * - Nothing loads without NEXT_PUBLIC_GA_ID; the GA script itself loads in production only.
@@ -21,7 +29,7 @@ export default function Analytics() {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    if (!gaId) return;
+    if (!GA4_ENABLED || !gaId) return;
     const stored = localStorage.getItem(CONSENT_KEY);
     window.gtag?.('consent', 'default', {
       ad_storage: 'denied',
@@ -36,6 +44,10 @@ export default function Analytics() {
   }, [gaId]);
 
   const choose = (granted: boolean) => {
+    if (!GA4_ENABLED) {
+      setShowBanner(false);
+      return;
+    }
     localStorage.setItem(CONSENT_KEY, granted ? 'granted' : 'denied');
     window.gtag?.('consent', 'update', {
       analytics_storage: granted ? 'granted' : 'denied',
@@ -43,11 +55,11 @@ export default function Analytics() {
     setShowBanner(false);
   };
 
-  if (!gaId) return null;
+  if (!GA4_ENABLED || !gaId) return null;
 
   return (
     <>
-      {process.env.NODE_ENV === 'production' && <GoogleAnalytics gaId={gaId} />}
+      {GA4_ENABLED && process.env.NODE_ENV === 'production' && <GoogleAnalytics gaId={gaId} />}
       {showBanner && (
         <div
           role='dialog'

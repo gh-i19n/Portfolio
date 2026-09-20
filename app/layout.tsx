@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import Analytics from '@/components/Analytics'
+import Ga4AnalyticsArchived from '@/components/Analytics'
+import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://i19n.dev'),
@@ -59,7 +60,9 @@ export default function RootLayout({
       </head>
       <body className='min-h-screen bg-background font-base text-base text-muted-foreground antialiased selection:bg-primary/20 selection:text-primary'>
         {children}
-        <Analytics />
+        {/* ARCHIVED (GA4): kept mounted for reference but internally disabled via GA4_ENABLED=false. */}
+        <Ga4AnalyticsArchived />
+        <VercelAnalytics />
       </body>
     </html>
   )
